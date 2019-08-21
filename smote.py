@@ -5,8 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.neighbors import NearestNeighbors
 
-from debug import pm
-
 
 # general parameters
 Nnbrs = 5
@@ -78,7 +76,6 @@ feature_names = [x for x in feature_nametypes.keys()]
 num_features = len(feature_nametypes)
 
 
-@pm
 def main():
     df = pd.read_csv(fin)
     # enum_df = enumerate_categories(df, feature_enums)
@@ -176,7 +173,6 @@ def smote(df, enum_df, feature_nametypes, target_field):
 
     columns = [x for x in feature_nametypes.keys()] + [target_field]
     new_df = pd.DataFrame(new_data, columns=columns)
-    # import ipdb; ipdb.set_trace()
 
     return new_df
 
@@ -194,12 +190,12 @@ def get_neighbors_categorical_kdtree(data, K, feature_nametypes):
     # idea: categorical axes 
     pass
 
+
 def get_neighbors_hybrid(data, K, feature_nametypes):
     numeric_idx = [n for n, kv in enumerate(feature_nametypes.items()) if kv[1] != 'enum']
     numeric_data = data[:, numeric_idx]
     numeric_nbrs = NearestNeighbors(n_neighbors=4*K+1, algorithm='ball_tree').fit(numeric_data)
     numeric_distances, numeric_indices = numeric_nbrs.kneighbors(numeric_data)
-    import ipdb; ipdb.set_trace()
 
 
 def get_neighbors_naive(data, K, feature_nametypes):
