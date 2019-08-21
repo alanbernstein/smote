@@ -15,7 +15,16 @@ PLOT = False
 
 # dataset definition
 dataset = 'bank'
-if dataset == 'iris':
+if dataset == 'template':
+    fin = 'input.csv'
+    fin_enum = 'input-enum.csv'
+    fout = 'oversampled.csv'
+    feature_nametypes = OrderedDict({
+    })
+    feature_enums = {}
+    target_field = 'y'
+
+elif dataset == 'iris':
     fin = "iris.csv"
     feature_nametypes = OrderedDict({
         'sepal_length': 'float',
@@ -25,6 +34,7 @@ if dataset == 'iris':
     })
     target_field = 'species'
     plot_ind_x, plot_ind_y = 0, 3
+
 elif dataset == 'bank':
     # https://archive.ics.uci.edu/ml/datasets/Bank+Marketing
     fin = 'bank-additional-full.csv'
